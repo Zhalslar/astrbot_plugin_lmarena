@@ -1,18 +1,19 @@
 from collections import defaultdict
 from datetime import datetime
-from astrbot.api.event import filter
+
 from astrbot.api import logger
-from astrbot.api.star import Context, Star, register, StarTools
+from astrbot.api.event import filter
+from astrbot.api.star import Context, Star, StarTools
 from astrbot.core import AstrBotConfig
 from astrbot.core.message.components import Image
 from astrbot.core.platform.astr_message_event import AstrMessageEvent
-from data.plugins.astrbot_plugin_lmarena.file_bed import ImageServer
+
+from .bridge.server import FastAPIWrapper, LMArenaBridgeServer
+from .file_bed import ImageServer
 from .utils import normalize_server
-from .bridge.server import LMArenaBridgeServer, FastAPIWrapper
 from .workflow import Workflow
 
 
-@register("astrbot_plugin_lmarena", "Zhalslar", "...", "...")
 class LMArenaPlugin(Star):
     def __init__(self, context: Context, config: AstrBotConfig):
         super().__init__(context)
